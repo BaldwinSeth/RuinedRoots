@@ -257,7 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8b8564309115a4fa3526d22fc65b73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 1171862271}
+  weapon: {fileID: 1171862274}
   moveSpeed: 0.25
 --- !u!212 &599005271
 SpriteRenderer:
@@ -688,7 +688,7 @@ GameObject:
   - component: {fileID: 1745196182}
   - component: {fileID: 1745196181}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Bean
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -12,9 +12,9 @@ public class PlayerController : MonoBehaviour {
     private InputAction interactAction;
     
     [SerializeField]
-    GameObject weapon;
+    Weapon weapon;
 
-    private Rigidbody2D rigidbody2D;
+    private Rigidbody2D rigidBody2D;
 
     [SerializeField]
     float moveSpeed = 3f;
@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour {
 
     void Awake() {
         playerInput = GetComponent<PlayerInput>();
-        rigidbody2D = GetComponent<Rigidbody2D>();
+        rigidBody2D = GetComponent<Rigidbody2D>();
         moveAction = playerInput.actions["Move"];
         jumpAction = playerInput.actions["Jump"];
         attackAction = playerInput.actions["Attack"];
@@ -32,7 +32,6 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Start(){
-        weapon.SetActive(false);
 
     }
 
@@ -59,7 +58,7 @@ public class PlayerController : MonoBehaviour {
         
         
         if(input.x>0.1f || input.x<-0.1f){
-        rigidbody2D.AddForce(new Vector2(input.x * moveSpeed, 0f), ForceMode2D.Impulse);
+        rigidBody2D.AddForce(new Vector2(input.x * moveSpeed, 0f), ForceMode2D.Impulse);
         }
         
 
@@ -67,9 +66,10 @@ public class PlayerController : MonoBehaviour {
 
     private void Attack(){
         Debug.Log($"{transform.name} attacked.");
-        weapon.SetActive(true);
-        //do  a thing
-        weapon.SetActive(false);
+        weapon.Attack();
+
     }
+
+
 
 }
