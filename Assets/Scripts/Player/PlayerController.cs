@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour {
 
     [SerializeField]
     float moveSpeed = 3f;
+    [SerializeField]
+    float jumpHeight = 20f;
     
     
     
@@ -37,11 +39,12 @@ public class PlayerController : MonoBehaviour {
 
     void OnEnable() {
         attackAction.performed += _ => Attack();
+        jumpAction.performed += _ => Jump();
     }
 
     void OnDisable(){
         attackAction.performed -= _ => Attack();
-
+        jumpAction.performed -= _ => Jump();
     }
 
     // Update is called once per frame
@@ -64,12 +67,13 @@ public class PlayerController : MonoBehaviour {
 
     }
 
+    private void Jump(){
+        rigidBody2D.AddForce(new Vector2(0f, jumpHeight), ForceMode2D.Impulse);
+    }
+
     private void Attack(){
         Debug.Log($"{transform.name} attacked.");
         weapon.Attack();
 
     }
-
-
-
 }

@@ -8,17 +8,23 @@ public class HealthPool : MonoBehaviour
     int health = 3;
 
     public bool isDead{
-        get {return health>0;}
+        get {return health<=0;}
     }
     public int getHealth(){
         return health;
     }
 
     public void DealDamage(){
-        if(health>0) {health-=1;}
-        if(DebuggingStatus.isDebugging){
-            Debug.Log($"Damage Delt, current health is {health}. currently dead: {isDead}");
-        } 
+        if(!isDead) {
+            health-=1;
+            if(DebuggingStatus.isDebugging) {
+                Debug.Log($"Damage Delt, current health is {health}. currently dead: {isDead}");
+            } 
+        } else{
+            if(DebuggingStatus.isDebugging) {
+                Debug.Log($"Already Dead");
+            } 
+        }
         
     }
 }
