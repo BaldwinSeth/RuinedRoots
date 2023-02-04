@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour {
     
     [SerializeField]
     Weapon weapon;
+    [SerializeField] 
+    List<Transform> terrainObjectsInRange;
 
     private Rigidbody2D rigidBody2D;
 
@@ -20,6 +22,11 @@ public class PlayerController : MonoBehaviour {
     float moveSpeed = 3f;
     [SerializeField]
     float jumpHeight = 20f;
+
+    public bool isGrounded {
+        get {return terrainObjectsInRange.Count>0;}
+        private set {}
+    }
     
     
     
@@ -40,6 +47,7 @@ public class PlayerController : MonoBehaviour {
     void OnEnable() {
         attackAction.performed += _ => Attack();
         jumpAction.performed += _ => Jump();
+        terrainObjectsInRange = new List<Transform>();
     }
 
     void OnDisable(){
@@ -67,8 +75,23 @@ public class PlayerController : MonoBehaviour {
 
     }
 
+    private void OnTriggerEnter2D(Collider2D other) {
+        if(other.transform.tag == "Terrain"){
+            terrainObjectsInRange.Add(other.transform);
+        }
+        
+    }
+
+    private void OnTriggerExit2D(Collider2D other) {
+        if(terrainObjectsInRange.Contains(other.transform)){
+            terrainObjectsInRange.Remove(other.transform);
+        }
+    }
+
+
+
     private void Jump(){
-        rigidBody2D.AddForce(new Vector2(0f, jumpHeight), ForceMode2D.Impulse);
+        if(isGrounded) rigidBody2D.AddForce(new Vector2(0f, jumpHeight), ForceMode2D.Impulse);
     }
 
     private void Attack(){
