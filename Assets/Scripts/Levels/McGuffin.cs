@@ -6,6 +6,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Collider2D))]
 public class McGuffin : MonoBehaviour {
     
+    [SerializeField]
     private bool _isFound = false;
     public bool isFound{
         get {return _isFound;}
@@ -41,10 +42,8 @@ public class McGuffin : MonoBehaviour {
     }
     
     private void Collect() {
-        levelProgressTracker.updateMcGuffinCollection(this);
-        isFound = true;
-        
-        
+        isFound = true;      
+        levelProgressTracker.updateMcGuffinCollection();  
     }
 
     private void setImageToCollected(){

@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProgressTracker: MonoBehaviour
+public class GameProgressTracker: MonoBehaviour
 {
-    private static ProgressTracker _instance;
+    private static GameProgressTracker _instance;
     
-    public static ProgressTracker Instance {
+    public static GameProgressTracker Instance {
         get {
             if(_instance !=null) {return _instance;}
             else {CreateProgressTracker(); return _instance;}
@@ -28,9 +28,9 @@ public class ProgressTracker: MonoBehaviour
 
     static void CreateProgressTracker(){
         GameObject newProgressTracker = new GameObject();
-        newProgressTracker.AddComponent<ProgressTracker>();
+        newProgressTracker.AddComponent<GameProgressTracker>();
 
-        _instance = newProgressTracker.GetComponent<ProgressTracker>();
+        _instance = newProgressTracker.GetComponent<GameProgressTracker>();
     }
 
     [SerializeField]

@@ -9,6 +9,7 @@ TagManager:
   - Terrain
   - ProgressTracker
   - IndicatorCompletionImage
+  - HealthBar
   layers:
   - Default
   - TransparentFX

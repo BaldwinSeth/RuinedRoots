@@ -13,11 +13,20 @@ public class LevelProgressTracker : MonoBehaviour {
     RadialProgressIndicator progressIndicator;
 
     [SerializeField]
-    int LevelIndex = -1;
+    LevelExit levelExit;
 
+    [SerializeField]
+    int levelIndex = -1;
+
+    [SerializeField]
+    UIController uIController;
+
+    [SerializeField]
     private float progress;
     
+    [SerializeField]
     private bool _levelReadyToComplete = false;
+
 
     public bool LevelIsReadyToComplete{
         get { return _levelReadyToComplete;}
@@ -25,48 +34,51 @@ public class LevelProgressTracker : MonoBehaviour {
 
     [SerializeField]
     Slider slider;
-    
-    bool allAreFound = true;
 
     void Start() {
 
-        ProgressTracker.Instance.updateLevelStatus(LevelIndex, LevelStatus.Inprogress);
-
-        
+        GameProgressTracker.Instance.updateLevelStatus(levelIndex, LevelStatus.Inprogress);
+        levelExit = GetComponentInChildren<LevelExit>();
+        levelExit.setLevelIndex(levelIndex);
+        uIController = FindFirstObjectByType<UIController>();
 
     }
 
-    private void findMcGuffins(){
+    private void OnEnable(){
+        refreshMcGuffins();
+    }
+
+    private void refreshMcGuffins(){
+        List<McGuffin> newMcGuffinList = new List<McGuffin>();
         McGuffin[] foundMcGuffins = GetComponentsInChildren<McGuffin>();
-        mcGuffins.AddRange(foundMcGuffins);
+        Debug.LogWarning($"McGuffin Count: {foundMcGuffins.Length}");
+        newMcGuffinList.AddRange(foundMcGuffins);
+        mcGuffins = newMcGuffinList;
     }
 
-    public void updateMcGuffinCollection(McGuffin mcGuffin){
-        if(DebuggingStatus.isDebugging){
-            Debug.Log($"{mcGuffin.name} updated.");
-        }
-        float foundMcGuffinCount = mcGuffins.Count + 1f;
+    public void updateMcGuffinCollection(){
+
+        float foundMcGuffinCount = mcGuffins.Count;
+        bool anyStillNotFound = false;
         foreach(McGuffin mg in mcGuffins){
-            if(mg.isFound){
-                allAreFound = false;
+            if(!mg.isFound){
+                anyStillNotFound = true;
                 foundMcGuffinCount -= 1f;
             }
         }
 
         progress = foundMcGuffinCount/mcGuffins.Count;
+        uIController.updateLevelProgress(levelIndex, progress);
 
-        progressIndicator.progress = progress;
-
-        checkCompletion(allAreFound);
-    }
-
-    void checkCompletion(bool allAreFound){
-        Debug.LogWarning($"All are found: {allAreFound}");
-        if(allAreFound){
-            _levelReadyToComplete = true;
+        if(!anyStillNotFound){
+            _levelReadyToComplete = !anyStillNotFound;
+            levelExit.SetReadyToLeave();
         }
+        
+
     }
 
+    
     
 
 }

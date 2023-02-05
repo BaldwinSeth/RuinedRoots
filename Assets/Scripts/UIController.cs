@@ -20,7 +20,7 @@ public class UIController : MonoBehaviour {
         );
     }
 
-    private void updateLevelProgress(int index, float progress){
+    public void updateLevelProgress(int index, float progress){
         indicators[index].progress = progress;
     }
 }
