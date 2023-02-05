@@ -26,6 +26,7 @@ public class LevelExit : MonoBehaviour
         //leave the level
         Debug.LogWarning("Player is Leaving!");
         gameObject.SetActive(false);
+        GameProgressTracker.Instance.updateLevelStatus(levelIndex, LevelStatus.Completed);
         SceneManager.LoadScene(levelIndex+1);
     }
 

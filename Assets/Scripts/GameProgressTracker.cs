@@ -8,7 +8,7 @@ public class GameProgressTracker: MonoBehaviour
     
     public static GameProgressTracker Instance {
         get {
-            if(_instance !=null) {return _instance;}
+            if(GameProgressTracker._instance !=null) {return _instance;}
             else {CreateProgressTracker(); return _instance;}
         }
         private set{
@@ -21,8 +21,11 @@ public class GameProgressTracker: MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         if (_instance==null){
+            Debug.LogWarning("reassigning GameProgTracker");
             Instance = this;
             return;
+        } else {
+            Destroy(gameObject, 1f);
         }
     }
 
@@ -38,6 +41,15 @@ public class GameProgressTracker: MonoBehaviour
 
     public void updateLevelStatus(int index, LevelStatus newStatus) {
         _levelStatuses[index] = newStatus;
+    }
+
+    public void updateDisplays(UIController controller){
+        for(int i = 0; i<_levelStatuses.Count;i++){
+            if(_levelStatuses[i] == LevelStatus.Completed){
+                Debug.LogWarning("Completed");
+                controller.updateLevelProgress(i, 1f);
+            }
+        }
     }
 
 }
