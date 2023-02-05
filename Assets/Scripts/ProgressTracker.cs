@@ -36,7 +36,7 @@ public class ProgressTracker: MonoBehaviour
     [SerializeField]
     List<LevelStatus> _levelStatuses;
 
-    public void updateLevelStats(int index, LevelStatus newStatus) {
+    public void updateLevelStatus(int index, LevelStatus newStatus) {
         _levelStatuses[index] = newStatus;
     }
 

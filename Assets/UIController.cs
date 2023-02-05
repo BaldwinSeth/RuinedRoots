@@ -7,6 +7,10 @@ public class UIController : MonoBehaviour {
     List<RadialProgressIndicator> indicators;
 
     void Awake() {
+        collectIndicators();
+    }
+
+    private void collectIndicators(){
         RadialProgressIndicator[] foundIndicators = GetComponentsInChildren<RadialProgressIndicator>();
         indicators.AddRange(foundIndicators);
         indicators.Sort(
@@ -14,6 +18,9 @@ public class UIController : MonoBehaviour {
                 return RPI1.LevelIndex.CompareTo(RPI2.LevelIndex);
             }
         );
+    }
 
+    private void updateLevelProgress(int index, float progress){
+        indicators[index].progress = progress;
     }
 }

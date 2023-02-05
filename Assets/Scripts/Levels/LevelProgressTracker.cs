@@ -29,13 +29,16 @@ public class LevelProgressTracker : MonoBehaviour {
     bool allAreFound = true;
 
     void Start() {
+
+        ProgressTracker.Instance.updateLevelStatus(LevelIndex, LevelStatus.Inprogress);
+
         
-        foreach(McGuffin mg in mcGuffins){
-            if (mg == null) mcGuffins.Remove(mg);
-        }
 
-        ProgressTracker.Instance.updateLevelStats(LevelIndex, LevelStatus.Inprogress);
+    }
 
+    private void findMcGuffins(){
+        McGuffin[] foundMcGuffins = GetComponentsInChildren<McGuffin>();
+        mcGuffins.AddRange(foundMcGuffins);
     }
 
     public void updateMcGuffinCollection(McGuffin mcGuffin){
