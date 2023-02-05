@@ -41,17 +41,17 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Start(){
-
-    }
-
-    void OnEnable() {
         attackAction.performed += _ => Attack();
         jumpAction.performed += _ => Jump();
         terrainObjectsInRange = new List<Transform>();
     }
 
-    void OnDisable(){
-        attackAction.performed -= _ => Attack();
+    void OnEnable() {
+        
+    }
+
+    void OnDestroy(){
+        attackAction.performed -=  _ => Attack();
         jumpAction.performed -= _ => Jump();
     }
 

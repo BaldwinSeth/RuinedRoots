@@ -10,6 +10,10 @@ public class UIController : MonoBehaviour {
         collectIndicators();
     }
 
+    void OnEnable(){
+        GameProgressTracker.Instance.updateDisplays(this);
+    }
+
     private void collectIndicators(){
         RadialProgressIndicator[] foundIndicators = GetComponentsInChildren<RadialProgressIndicator>();
         indicators.AddRange(foundIndicators);
