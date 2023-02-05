@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Collider2D))]
 public class McGuffin : MonoBehaviour {
@@ -8,8 +9,17 @@ public class McGuffin : MonoBehaviour {
     private bool _isFound = false;
     public bool isFound{
         get {return _isFound;}
-        private set{ _isFound = value;}
+        private set{ 
+            _isFound = value;
+            setImageToCollected();
+            }
     }
+
+    [SerializeField]
+    SpriteRenderer unCollectedSprite;
+
+    [SerializeField]
+    SpriteRenderer collectedSprite;
 
     LevelProgressTracker levelProgressTracker;
 
@@ -34,5 +44,11 @@ public class McGuffin : MonoBehaviour {
         levelProgressTracker.updateMcGuffinCollection(this);
         isFound = true;
         
+        
+    }
+
+    private void setImageToCollected(){
+        collectedSprite.gameObject.SetActive(false);
+        unCollectedSprite.gameObject.SetActive(true);
     }
 }
