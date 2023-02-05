@@ -238,6 +238,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2554797335632746728, guid: 97bbaf80d484a0f4ab865a12fc3c8aaa, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2554797335632746729, guid: 97bbaf80d484a0f4ab865a12fc3c8aaa, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -432,7 +436,7 @@ Transform:
   - {fileID: 336914679}
   - {fileID: 1219352945}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &599005272 stripped
 Transform:
@@ -596,7 +600,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1106135001
 MonoBehaviour:
