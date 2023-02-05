@@ -549,6 +549,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: ProgressTracker
       objectReference: {fileID: 0}
+    - target: {fileID: 3198481028767808502, guid: 55cb750c05fa51f42bebb8633c747906, type: 3}
+      propertyPath: _levelStatuses.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3198481028767808502, guid: 55cb750c05fa51f42bebb8633c747906, type: 3}
+      propertyPath: _levelStatuses.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3198481028767808502, guid: 55cb750c05fa51f42bebb8633c747906, type: 3}
+      propertyPath: _levelStatuses.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3198481028767808502, guid: 55cb750c05fa51f42bebb8633c747906, type: 3}
+      propertyPath: _levelStatuses.Array.data[2]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3198481028767808502, guid: 55cb750c05fa51f42bebb8633c747906, type: 3}
+      propertyPath: _levelStatuses.Array.data[3]
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3198481028767808503, guid: 55cb750c05fa51f42bebb8633c747906, type: 3}
       propertyPath: m_RootOrder
       value: 3
