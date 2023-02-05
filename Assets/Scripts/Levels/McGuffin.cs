@@ -4,9 +4,11 @@ using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
 public class McGuffin : MonoBehaviour {
+    
+    private bool _isFound = false;
     public bool isFound{
-        get {return isFound;}
-        private set{ isFound = value;}
+        get {return _isFound;}
+        private set{ _isFound = value;}
     }
 
     LevelProgressTracker levelProgressTracker;
@@ -20,13 +22,17 @@ public class McGuffin : MonoBehaviour {
     }
     
     void OnTriggerEnter2D(Collider2D other){
+        if(DebuggingStatus.isDebuggingMcGuffins) {
+            Debug.Log($"{name} collided with {other.name}");
+        }
         if(other.tag=="Player"){
             Collect();
         }
     }
     
     private void Collect() {
-        levelProgressTracker.updateCollection(this);
-        Debug.Log("I was found!");
+        levelProgressTracker.updateMcGuffinCollection(this);
+        isFound = true;
+        
     }
 }

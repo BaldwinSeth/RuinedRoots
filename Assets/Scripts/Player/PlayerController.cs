@@ -91,6 +91,7 @@ public class PlayerController : MonoBehaviour {
 
 
     private void Jump(){
+        Debug.Log("I'm jumping");
         if(isGrounded) rigidBody2D.AddForce(new Vector2(0f, jumpHeight), ForceMode2D.Impulse);
     }
 

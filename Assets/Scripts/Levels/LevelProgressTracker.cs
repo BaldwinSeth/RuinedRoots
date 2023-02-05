@@ -9,6 +9,9 @@ public class LevelProgressTracker : MonoBehaviour {
     [SerializeField]
     List<McGuffin> mcGuffins;
 
+    [SerializeField]
+    List<RadialProgressIndicator> progressIndicators;
+
     private float progress;
 
     [SerializeField]
@@ -16,10 +19,20 @@ public class LevelProgressTracker : MonoBehaviour {
     
     bool allAreFound = true;
 
-    void Awake() {
+    void Start() {
+        foreach(RadialProgressIndicator mg in progressIndicators){
+            if (mg == null) progressIndicators.Remove(mg);
+        }
+        foreach(McGuffin mg in mcGuffins){
+            if (mg == null) mcGuffins.Remove(mg);
+        }
 
     }
-    public void updateCollection(McGuffin mcGuffin){
+
+    public void updateMcGuffinCollection(McGuffin mcGuffin){
+        if(DebuggingStatus.isDebugging){
+            Debug.Log($"{mcGuffin.name} updated.");
+        }
         float foundMcGuffinCount = mcGuffins.Count + 1f;
         foreach(McGuffin mg in mcGuffins){
             if(mg.isFound){
@@ -29,8 +42,12 @@ public class LevelProgressTracker : MonoBehaviour {
         }
 
         progress = foundMcGuffinCount/mcGuffins.Count;
-        slider.value = progress;
 
+        checkCompletion(allAreFound);
+    }
+
+    void checkCompletion(bool allAreFound){
+        Debug.LogWarning($"All are found: {allAreFound}");
     }
 
 }
